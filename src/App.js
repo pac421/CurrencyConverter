@@ -1,25 +1,32 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import LocaleSelector from './components/LocaleSelector';
+import LocalizedDatePicker from './components/LocalizedDatePicker';
+import CryptoDropdown from './components/CryptoDropdown';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [locale, setLocale] = useState('FR');
+    const [date, setDate] = useState(new Date());
+    const [crypto, setCrypto] = useState([]);
+
+    return (
+        <div className="App">
+            <LocaleSelector
+                locale={locale}
+                setLocale={setLocale}
+            />
+            <LocalizedDatePicker 
+                date={date} 
+                setDate={setDate} 
+                locale={locale} 
+            />
+            <CryptoDropdown 
+                crypto={crypto}
+                setCrypto={setCrypto}
+                locale={locale}
+            />
+        </div>
+    );
 }
 
 export default App;
