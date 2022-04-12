@@ -58,6 +58,7 @@ const CryptoDropdown = ({ crypto, setCrypto, locale }) => {
             isLoading={isLoading}
             isSearchable={true}
             options={options}
+            className="CryptoDropdown"
             placeholder={languages[locale].placeholder}
             noOptionsMessage={() => { 
                 return inputValue.length < 3
