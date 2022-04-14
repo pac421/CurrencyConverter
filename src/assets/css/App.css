@@ -1,3 +1,7 @@
+body {
+    background-color: #1A1A40;
+}
+
 .App {
     padding: 50px 20% 0 20%;
     display: flex;
@@ -6,8 +10,6 @@
 }
 
 .LocaleSelector {
-    margin-bottom: 30px;
-    width: 300px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -22,17 +24,20 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    color: white;
 }
 .LocaleItem.selected {
-    background-color: #cccccc;
+    background-color: #7A0BC0;
 }
 
-
-.LocalizedDatePicker {
-    margin-bottom: 30px;
-    width: 300px;
-}
-
+.LocaleSelector,
+.LocalizedDatePicker,
 .CryptoDropdown {
     width: 300px;
+    margin-bottom: 30px;
+}
+
+.LocalizedDatePicker input {
+    height: 70px;
+    padding: 0px 14px;
 }

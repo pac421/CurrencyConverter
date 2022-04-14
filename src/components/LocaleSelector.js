@@ -25,7 +25,7 @@ const LocaleSelector = ({ locale, setLocale }) => {
                     }}
                     title={countryCode}
                 />
-                {countryCode}
+                <span>{countryCode}</span>
             </button>
         )
     }

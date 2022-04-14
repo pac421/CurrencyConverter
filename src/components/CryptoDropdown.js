@@ -52,13 +52,14 @@ const CryptoDropdown = ({ crypto, setCrypto, locale }) => {
 
     return (
         <Select
+            className='react-select-container'
+            classNamePrefix='react-select'
             isMulti={true}
             value={crypto}
             onChange={onValueChange}
             isLoading={isLoading}
             isSearchable={true}
             options={options}
-            className="CryptoDropdown"
             placeholder={languages[locale].placeholder}
             noOptionsMessage={() => { 
                 return inputValue.length < 3

@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
+import { ThemeProvider, useTheme, createTheme } from '@mui/material/styles';
 import LocaleSelector from './components/LocaleSelector';
 import LocalizedDatePicker from './components/LocalizedDatePicker';
 import CryptoDropdown from './components/CryptoDropdown';
-import './App.css';
+import './assets/css/App.css';
+
+const darkTheme = createTheme({
+    palette: {
+        mode: 'dark',
+    },
+});
 
 function App() {
     const [locale, setLocale] = useState('FR');
@@ -10,22 +17,24 @@ function App() {
     const [crypto, setCrypto] = useState([]);
 
     return (
-        <div className="App">
-            <LocaleSelector
-                locale={locale}
-                setLocale={setLocale}
-            />
-            <LocalizedDatePicker 
-                date={date} 
-                setDate={setDate} 
-                locale={locale} 
-            />
-            <CryptoDropdown 
-                crypto={crypto}
-                setCrypto={setCrypto}
-                locale={locale}
-            />
-        </div>
+        <ThemeProvider theme={darkTheme}>
+            <div className="App">
+                <LocaleSelector
+                    locale={locale}
+                    setLocale={setLocale}
+                />
+                <LocalizedDatePicker 
+                    date={date} 
+                    setDate={setDate} 
+                    locale={locale} 
+                />
+                <CryptoDropdown 
+                    crypto={crypto}
+                    setCrypto={setCrypto}
+                    locale={locale}
+                />
+            </div>
+        </ThemeProvider>  
     );
 }
 

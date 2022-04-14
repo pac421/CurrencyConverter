@@ -1,0 +1,36 @@
+.react-select-container {
+    width: 300px;
+    
+    .react-select__control {
+        background-color: transparent;
+        border-color: rgba(255, 255, 255, 0.23);
+        transition: none;
+        height: 70px;
+    
+        &:hover {
+            border-color: #000;
+        }
+    }
+  
+    .react-select__menu {
+        background-color: #000;
+        border: 1px solid #000;
+    }
+  
+    .react-select__option {
+        background-color: #000;
+    
+        &:hover {
+            background-color: #000;
+        }
+    }
+  
+    .react-select__indicator-separator {
+        background-color: rgba(255, 255, 255, 0.23);
+    }
+  
+    .react-select__placeholder,
+    .react-select__single-value {
+        color: #fff;
+    }
+}
