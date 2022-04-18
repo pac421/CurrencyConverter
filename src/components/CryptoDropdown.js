@@ -72,6 +72,30 @@ const CryptoDropdown = ({ crypto, setCrypto, locale }) => {
             inputValue={inputValue}
             onInputChange={searchInputChange}
             clearValue={() => setCrypto([])}
+            theme={(theme) => ({
+                ...theme,
+                borderRadius: 0,
+                colors: {
+                  ...theme.colors,
+                  primary: '#24ab05', //on focus select border
+                  primary75: '#fff',
+                  primary50: '#24ab05', //on select item bg
+                  primary25: '#010502', //on hover item bg
+                  danger: '#fff', //on hover delete item color
+                  dangerLight: '#010502', //delete item bg
+                  neutral0: '#010502', //select bg
+                  neutral10: '#010502', //item bg
+                  neutral15: '#fff',
+                  neutral20: '#24ab05', //select border
+                  neutral30: '#24ab05', //on hover select border
+                  neutral40: '#24ab05', //no results text
+                  neutral50: '#24ab05', //placeholder
+                  neutral60: '#24ab05', //delete all & open icon
+                  neutral70: '#fff',
+                  neutral80: '#24ab05', //input search text color
+                  neutral90: '#fff',
+                },
+              })}
         />
     )
 }

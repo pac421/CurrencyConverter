@@ -1,7 +1,7 @@
 import React from "react";
 import ReactCountryFlag from "react-country-flag";
 
-const flagSize = '40px';
+const flagSize = '20px';
 
 const LocaleSelector = ({ locale, setLocale }) => {
 
@@ -25,7 +25,6 @@ const LocaleSelector = ({ locale, setLocale }) => {
                     }}
                     title={countryCode}
                 />
-                <span>{countryCode}</span>
             </button>
         )
     }
