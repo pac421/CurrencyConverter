@@ -9,6 +9,7 @@
 }
 ::-webkit-scrollbar {
     width: 3px;
+    height: 3px;
 }
 ::-webkit-scrollbar-track {
     background: var(--bg-color);
@@ -111,4 +112,25 @@ body {
 }
 .css-1qrcf79-MuiLinearProgress-bar1 {
     background-color: var(--primary-color) !important;
+}
+.ConvertionResultsHistory {
+    width: 90%;
+    margin-bottom: 70px;
+}
+.ConvertionResult {
+    margin-top: 70px;
+    overflow-x: auto;
+}
+.ConvertionResult table {
+    margin-bottom: 15px;
+}
+.ConvertionResult th,
+.ConvertionResult td {
+    padding: 5px 5px;
+}
+.ConvertionResult td {
+    font-size: 20px;
+}
+.ConvertionResult .date {
+    font-size: 22px;
 }

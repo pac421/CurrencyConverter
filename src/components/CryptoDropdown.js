@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
 
+const PRIMARY_COLOR = '#24ab05';
+const BG_COLOR = '#010502';
+
 const languages = {
     GB: {
         placeholder: "Search for one or more cryptocurrencies..",
@@ -77,22 +80,22 @@ const CryptoDropdown = ({ crypto, setCrypto, locale }) => {
                 borderRadius: 0,
                 colors: {
                   ...theme.colors,
-                  primary: '#24ab05', //on focus select border
+                  primary: PRIMARY_COLOR, //on focus select border
                   primary75: '#fff',
-                  primary50: '#24ab05', //on select item bg
-                  primary25: '#010502', //on hover item bg
+                  primary50: PRIMARY_COLOR, //on select item bg
+                  primary25: BG_COLOR, //on hover item bg
                   danger: '#fff', //on hover delete item color
-                  dangerLight: '#010502', //delete item bg
-                  neutral0: '#010502', //select bg
-                  neutral10: '#010502', //item bg
+                  dangerLight: BG_COLOR, //delete item bg
+                  neutral0: BG_COLOR, //select bg
+                  neutral10: BG_COLOR, //item bg
                   neutral15: '#fff',
-                  neutral20: '#24ab05', //select border
-                  neutral30: '#24ab05', //on hover select border
-                  neutral40: '#24ab05', //no results text
-                  neutral50: '#24ab05', //placeholder
-                  neutral60: '#24ab05', //delete all & open icon
+                  neutral20: PRIMARY_COLOR, //select border
+                  neutral30: PRIMARY_COLOR, //on hover select border
+                  neutral40: PRIMARY_COLOR, //no results text
+                  neutral50: PRIMARY_COLOR, //placeholder
+                  neutral60: PRIMARY_COLOR, //delete all & open icon
                   neutral70: '#fff',
-                  neutral80: '#24ab05', //input search text color
+                  neutral80: PRIMARY_COLOR, //input search text color
                   neutral90: '#fff',
                 },
               })}

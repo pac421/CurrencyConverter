@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import LocaleSelector from './components/LocaleSelector';
 import LocalizedDatePicker from './components/LocalizedDatePicker';
 import CryptoDropdown from './components/CryptoDropdown';
+import ConvertionResult from './components/ConvertionResult';
 import './assets/css/App.css';
 
 const darkTheme = createTheme({
@@ -33,7 +34,7 @@ const languages = {
     }
 }
 
-function LinearProgressWithLabel(props) {
+const LinearProgressWithLabel = (props) => {
     return (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Box sx={{ width: '100%', mr: 1 }}>
@@ -46,13 +47,36 @@ function LinearProgressWithLabel(props) {
     );
 }
 
+const ProcessConvertion = (coins) => {
+    const output = [];
+
+    coins.forEach(coin => {
+        const coinBtcValue = coin.market_data?.current_price?.btc;
+
+        const convertions = {};
+        coins.forEach(coinTarget => {
+            const targetCoinBtcValue = coinTarget.market_data?.current_price?.btc;
+            const convertionValue = coinBtcValue / targetCoinBtcValue;
+            convertions[coinTarget.id] = convertionValue;
+        });
+
+        output.push({
+            id: coin.id,
+            convertions: convertions
+        });
+    });
+
+    console.log('ProcessConvertion ouput: ', output);
+    return output;
+}
+
 function App() {
     const [locale, setLocale] = useState('GB');
     const [date, setDate] = useState(new Date());
     const [crypto, setCrypto] = useState([]);
     const [loading, setLoading] = useState(false);
     const [progress, setProgress] = useState(0);
-    const [data, setData] = useState([]);
+    const [convertionResultsHistory, setConvertionResultsHistory] = useState([]);
 
     const process = async () => {
         console.log('process stcryptoart');
@@ -60,13 +84,13 @@ function App() {
 
         const cryptoCount = crypto.length;
 
-        if(cryptoCount == 0)
+        if(cryptoCount === 0)
             return;
         
-        setData([]);
         setProgress(0);
         setLoading(true);
 
+        const data = [];
         for(let i = 0; i < cryptoCount; i++){
             const cryptoId = crypto[i].id;
             const formattedDate = moment(date).format('DD-MM-YYYY');
@@ -75,10 +99,21 @@ function App() {
             const response = await fetch(`https://api.coingecko.com/api/v3/coins/${cryptoId}/history?date=${formattedDate}&localization=${localId}`);
             const json = await response.json();
             data.push(json);
-            
+
             setProgress(100 / cryptoCount * i);
         }
-        console.log('data: ', data);
+
+        const convertionData = ProcessConvertion(data);
+
+        setConvertionResultsHistory(oldArray => [
+            {
+                time: moment().format('YYYY-MM-DD HH:mm:ss'),
+                convertionDate: moment(date).format('YYYY-MM-DD'),
+                convertionData: convertionData,
+            }, 
+            ...oldArray
+        ]);
+        console.log(convertionResultsHistory);
 
         setLoading(false);
     }
@@ -120,6 +155,11 @@ function App() {
                         }
                         
                     </div>
+                </div>
+                <div className='ConvertionResultsHistory'>
+                    { convertionResultsHistory.map((convertionResult, i) => (
+                        <ConvertionResult key={i} convertionResult={convertionResult} locale={locale} />
+                    )) }
                 </div>
             </div>
         </ThemeProvider>  

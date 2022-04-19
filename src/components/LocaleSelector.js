@@ -8,7 +8,7 @@ const LocaleSelector = ({ locale, setLocale }) => {
     const LocaleItem = ({ countryCode }) => {
 
         let className = 'LocaleItem';
-        if(countryCode == locale)
+        if(countryCode === locale)
           className += ' selected';
 
         return (
