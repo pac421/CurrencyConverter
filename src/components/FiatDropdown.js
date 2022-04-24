@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 import { getLocales } from '../Locales.js';
 
@@ -7,10 +7,24 @@ const locales = getLocales();
 const PRIMARY_COLOR = '#24ab05';
 const BG_COLOR = '#010502';
 
-const CryptoDropdown = ({ crypto, setCrypto, locale }) => {
+const FiatDropdown = ({ fiat, setFiat, locale }) => {
+    const [availableFiat, setAvailableFiat] = useState({});
     const [inputValue, setInputValue] = useState('');
     const [options, setOptions] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        const fetchData = async() => {
+            const response = await fetch('https://api.exchangerate.host/symbols');
+            const responseJSON = await response.json();
+
+            const availableFiatList = responseJSON.symbols;
+            console.log('availableFiat:' , availableFiatList);
+        
+            setAvailableFiat(availableFiatList);
+        }
+        fetchData();
+    }, []);
 
     const searchInputChange = async (searchValue) => {
         setInputValue(searchValue);
@@ -18,10 +32,19 @@ const CryptoDropdown = ({ crypto, setCrypto, locale }) => {
         if(searchValue.length >= 3) {
             setIsLoading(true);
 
-            const response = await fetch(`https://api.coingecko.com/api/v3/search?query=${searchValue}`);
-            const responseJSON = await response.json();
-    
-            const coins = responseJSON.coins;
+            const coins = [];
+
+            Object.keys(availableFiat).map((key) => {
+
+                const formattedDescription = availableFiat[key].description.toLowerCase();
+                const formattedCode = key.toLowerCase();
+                const formattedSearchValue = searchValue.toLowerCase();
+
+                if(formattedDescription.includes(formattedSearchValue) 
+                || formattedCode.includes(formattedSearchValue)) 
+                    coins.push(availableFiat[key]);
+            })
+
             console.log('coins: ', coins);
     
             setOptions(coins);
@@ -30,7 +53,7 @@ const CryptoDropdown = ({ crypto, setCrypto, locale }) => {
     };
 
     const onValueChange = (value, actionMeta) => {
-        setCrypto(value);
+        setFiat(value);
     }
 
     return (
@@ -38,23 +61,23 @@ const CryptoDropdown = ({ crypto, setCrypto, locale }) => {
             className='react-select-container'
             classNamePrefix='react-select'
             isMulti={true}
-            value={crypto}
+            value={fiat}
             onChange={onValueChange}
             isLoading={isLoading}
             isSearchable={true}
             options={options}
-            placeholder={locales[locale].cryptoDropdown.placeholder}
+            placeholder={locales[locale].fiatDropdown.placeholder}
             noOptionsMessage={() => { 
                 return inputValue.length < 3
-                    ? locales[locale].cryptoDropdown.needMinimumChar
-                    : locales[locale].cryptoDropdown.notFound
+                    ? locales[locale].fiatDropdown.needMinimumChar
+                    : locales[locale].fiatDropdown.notFound
                 ;
             }}
-            getOptionValue={opt => opt.id}
-            getOptionLabel={opt => opt.name}
+            getOptionValue={opt => opt.code}
+            getOptionLabel={opt => opt.description}
             inputValue={inputValue}
             onInputChange={searchInputChange}
-            clearValue={() => setCrypto([])}
+            clearValue={() => setFiat([])}
             theme={(theme) => ({
                 ...theme,
                 borderRadius: 0,
@@ -83,4 +106,4 @@ const CryptoDropdown = ({ crypto, setCrypto, locale }) => {
     )
 }
 
-export default CryptoDropdown;
+export default FiatDropdown;

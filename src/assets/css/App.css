@@ -6,6 +6,7 @@
     --secondary-color: #151f18;
     --bg-color: #010502;
     --border-radius: 0px;
+    --font-size: 22px;
 }
 ::-webkit-scrollbar {
     width: 3px;
@@ -30,7 +31,25 @@ body {
     flex-direction: column;
     align-items: center;
 }
-.Form {
+.EasyModeForm {
+    width: 700px;
+    display: flex;
+    justify-content: space-between;
+}
+.EasyModeForm > div {
+    width: 45%;    
+}
+.HardModeScreen {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.EasyModeScreen.hidden,
+.HardModeScreen.hidden {
+    display: none;
+}
+.HardModeForm {
    width: 350px;
 }
 .Headtitle {
@@ -38,12 +57,10 @@ body {
     margin: 50px 0 35px 0;
     text-align: center;
 }
-.LocaleContainer {
+.LocaleSelector {
     position: fixed;
     top: 10px;
     right: 10px;
-}
-.LocaleSelector {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -55,6 +72,7 @@ body {
 }
 .LocalizedDatePicker {
     margin-bottom: 35px;
+    width: 350px;
 }
 .LocalizedDatePicker .MuiFormControl-root {
     width: 100%;
@@ -70,28 +88,28 @@ body {
     padding: 0px 14px;
     font-family: var(--font-family);
     color: var(--primary-color);
-    font-size: 22px;
+    font-size: var(--font-size);
 }
 .LocalizedDatePicker svg {
     color: var(--primary-color);
 }
 .react-select__multi-value__label {
-    font-size: 20px !important;
+    font-size: var(--font-size) !important;
 }
 .react-select__control {
     margin-bottom: 35px;
     min-height: 70px !important;
 }
 .react-select__placeholder {
-    font-size: 20px;
+    font-size: var(--font-size);
 }
 .react-select__menu {
     border: 1px solid var(--primary-color) !important;
 }
-.SubmitContainer {
+.HardModeSubmitContainer {
     text-align: center;
 }
-.SubmitBtn {
+.HardModeSubmitBtn {
     border: solid 1px var(--primary-color);
     background-color: var(--bg-color);
     font-family: var(--font-family);
@@ -101,7 +119,7 @@ body {
     font-size: 24px;
     cursor: pointer;
 }
-.SubmitBtn:hover {
+.HardModeSubmitBtn:hover {
     background-color: var(--primary-color);
     font-family: var(--font-family);
     color: var(--bg-color);
@@ -113,24 +131,67 @@ body {
 .css-1qrcf79-MuiLinearProgress-bar1 {
     background-color: var(--primary-color) !important;
 }
-.ConvertionResultsHistory {
+.HardModeConvertionResultsHistory {
     width: 90%;
     margin-bottom: 70px;
 }
 .ConvertionResult {
     margin-top: 70px;
     overflow-x: auto;
+    display: flex;
+}
+.ConvertionResult .AmountInput {
+    width: 150px;
+    height: 100%;
+    font-size: var(--font-size);
 }
 .ConvertionResult table {
     margin-bottom: 15px;
 }
 .ConvertionResult th,
 .ConvertionResult td {
-    padding: 5px 5px;
+    padding: 10px;
 }
 .ConvertionResult td {
-    font-size: 20px;
+    font-size: var(--font-size);
 }
 .ConvertionResult .date {
-    font-size: 22px;
+    font-size: var(--font-size);
+}
+.ModeSwitcher {
+    display: flex;
+    font-size: var(--font-size);
+    position: fixed;
+    top: 10px;
+    left: 10px;
+}
+.ModeSwitcher > div:nth-child(1) {
+    margin-right: 10px;
+}
+.ModeSwitcher > div {
+    padding: 5px 10px;
+    border: solid 0.5px var(--primary-color);
+    cursor: pointer;
+}
+.ModeSwitcher > div.selected {
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+}
+.AmountInput {
+    border: solid 1px var(--primary-color);
+    background-color: var(--bg-color);
+    font-family: var(--font-family);
+    color: var(--primary-color);
+    cursor: pointer;
+    padding: 0px 14px;
+    -moz-appearance: textfield;
+    text-align: end;
+}
+.AmountInput:focus-visible {
+    outline: none;
+}
+.AmountInput::-webkit-outer-spin-button,
+.AmountInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

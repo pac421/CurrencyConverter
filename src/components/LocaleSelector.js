@@ -1,7 +1,7 @@
 import React from "react";
 import ReactCountryFlag from "react-country-flag";
 
-const flagSize = '20px';
+const flagSize = '25px';
 
 const LocaleSelector = ({ locale, setLocale }) => {
 
